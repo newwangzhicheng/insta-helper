@@ -1,0 +1,7 @@
+client/.expo
+client/dist
+client/node_modules
+insta-server/.venv
+server/build
+server/dist
+server/node_modules
