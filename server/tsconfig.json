@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "target": "esnext",
+    "strict": true,
+    "outDir": "./dist"
+  },
+  "exclude": ["node_modules"]
+}
