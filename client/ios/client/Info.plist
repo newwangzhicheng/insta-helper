@@ -74,5 +74,9 @@
     <string>Light</string>
     <key>UIViewControllerBasedStatusBarAppearance</key>
     <false/>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Please allow APP to save image/video in your device</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Please allow APP to visit image/video in your device</string>
   </dict>
 </plist>

@@ -1,12 +1,12 @@
 interface SocketRequest {
   login: {
-    username: string
+    username: string | null
     password: string | null
     isUseLogin: boolean
     session: string | null
-  },
+  }
   type: {
-    resource: resourceType,
+    resource: resourceType
     action: actionType
   }
   content: contentType

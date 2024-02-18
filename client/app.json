@@ -1,6 +1,5 @@
 {
   "expo": {
-    "jsEngine": "hermes",
     "name": "client",
     "slug": "client",
     "version": "1.0.0",
@@ -16,9 +15,11 @@
       "**/*"
     ],
     "ios": {
-      "jsEngine": "hermes",
       "supportsTablet": true,
-      "bundleIdentifier": "com.jaywangep.client"
+      "bundleIdentifier": "com.jaywangep.client",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -31,7 +32,15 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
     ],
     "extra": {
       "eas": {

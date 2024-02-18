@@ -4,6 +4,9 @@ import { StyleSheet } from 'react-native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import CookieManager from '@react-native-cookies/cookies'
+import { useDispatch } from 'react-redux'
+import { update } from '../store/sessionSlice'
+import { setItemAsync } from 'expo-secure-store'
 
 export default function InstaScreen() {
   const instaUrl = 'https://www.instagram.com'
@@ -14,13 +17,14 @@ export default function InstaScreen() {
       marginBottom: bottomTabBarHeight
     }
   })
+  const dispatch = useDispatch()
   const handleNavigationStateChange = () => {
     CookieManager.getAll(true).then(cookies => {
-      console.log(`get cookie from all: ${JSON.stringify(cookies)}`)
       const cookieStringAll = Object.values(cookies)
         .map(cookie => `${cookie.name}=${cookie.value}`)
         .join(';')
-      console.log(`get cookiestring from all ${cookieStringAll}`)
+      dispatch(update(cookieStringAll))
+      setItemAsync('session', cookieStringAll)
     })
   }
   return (

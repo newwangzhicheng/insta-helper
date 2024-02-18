@@ -21,7 +21,8 @@ class Resolver(object):
             self.data = json.loads(data)
             self.insta = instaloader.Instaloader(
                 # iphone_support=False,
-                max_connection_attempts=1)
+                # max_connection_attempts=2
+            )
             self.authentication = Authentication(self.insta)
         except:
             logger.error('json decode error')

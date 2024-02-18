@@ -1,9 +1,9 @@
-import {NextFunction, Router, Request, Response} from 'express'
+import { NextFunction, Router, Request, Response } from 'express'
 import Controller from '../interfaces/Controller.interface'
 import PostModel from './post.model'
-import {isAuthorized} from "../middlewares/auth.middleware";
-import HttpException from "../exceptions/HttpException";
-import SocketResponse from "../interfaces/SocketResponse.interface";
+import { isAuthorized } from '../middlewares/auth.middleware'
+import HttpException from '../exceptions/HttpException'
+import SocketResponse from '../interfaces/SocketResponse.interface'
 
 class PostController implements Controller {
   public path = '/post'
@@ -15,15 +15,11 @@ class PostController implements Controller {
   }
 
   private initializeMiddleware() {
-    this.router.use(isAuthorized)
+    // this.router.use(isAuthorized)
   }
 
   private initializeRoutes() {
-    this.router
-      .get(
-        `${this.path}/shortcode/:shortcode`,
-        this.getPostByShortcode
-      )
+    this.router.post(`${this.path}/shortcode`, this.getPostByShortcode)
   }
 
   private getPostByShortcode = async (
@@ -32,16 +28,8 @@ class PostController implements Controller {
     next: NextFunction
   ) => {
     try {
-      const shortcode = req.params.shortcode
-
-      let username = null
-      let session = null
-      if (res.locals.isAuthorized) {
-        username = req.session!.username
-        session = req.session!.session
-      }
+      const { shortcode, session } = req.body
       const response: SocketResponse = await new PostModel().findByShortcode({
-        username,
         session,
         shortcode
       })
@@ -50,7 +38,6 @@ class PostController implements Controller {
     } catch (Exception) {
       next(new HttpException(500, 'Internal error'))
     }
-
   }
 }
 

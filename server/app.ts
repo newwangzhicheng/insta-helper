@@ -1,15 +1,15 @@
 import Controller from './interfaces/Controller.interface'
 import ConfigOptions from './interfaces/ConfigOptions.interface'
 import express from 'express'
-import {readFileSync} from 'fs'
-import spdy, {Server} from 'spdy'
-import cookieSession from "cookie-session";
-import {error} from "./middlewares/error.middleware";
-import SocketRequest from "./interfaces/SocketRequest.interface";
-import SocketResponse from "./interfaces/SocketResponse.interface";
-import net from "net";
-import SocketException from "./exceptions/SocketException";
-import env from "./utils/env";
+import { readFileSync } from 'fs'
+import spdy, { Server } from 'spdy'
+import cookieSession from 'cookie-session'
+import { error } from './middlewares/error.middleware'
+import SocketRequest from './interfaces/SocketRequest.interface'
+import SocketResponse from './interfaces/SocketResponse.interface'
+import net from 'net'
+import SocketException from './exceptions/SocketException'
+import env from './utils/env'
 
 class App {
   public app: express.Application
@@ -46,19 +46,21 @@ class App {
     })
   }
 
-  static async sendDataToSocket(requestParams: SocketRequest): Promise<SocketResponse> {
+  static async sendDataToSocket(
+    requestParams: SocketRequest
+  ): Promise<SocketResponse> {
     const client = net.connect(env.SOCKET_PORT, env.SOCKET_HOST, () => {
       console.log('socket: connected')
       client.write(JSON.stringify(requestParams))
     })
 
     return new Promise<SocketResponse>((resolve, reject) => {
-      client.on('data', (data) => {
+      client.on('data', data => {
         console.log(`socket: received data, ${data}`)
         resolve(JSON.parse(data.toString()))
         client.destroy()
       })
-      client.on('error', (error) => {
+      client.on('error', error => {
         console.log(`socket: error, ${error.message}`)
         reject(new SocketException(10, error.message))
       })
@@ -69,17 +71,18 @@ class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(express.urlencoded({extended: false}))
+    this.app.use(express.urlencoded({ extended: false }))
     this.app.use(express.json())
-    this.app.use(cookieSession({
-      name: 'session',
-      keys: ['hTUFh4XXJF', 'J64QwQVy1a'],
-      expires: new Date(Date.now() + 360 * 24 * 100), // 100 days
-      secure: true,
-      httpOnly: true
-    }))
+    this.app.use(
+      cookieSession({
+        name: 'session',
+        keys: ['hTUFh4XXJF', 'J64QwQVy1a'],
+        expires: new Date(Date.now() + 360 * 24 * 100), // 100 days
+        secure: true,
+        httpOnly: true
+      })
+    )
   }
-
 
   private initializeControllers(controllers: Controller[]) {
     controllers.forEach(controller => {
@@ -92,11 +95,10 @@ class App {
   }
 
   private helloWorld() {
-    this.app.get('/',(req, res) => {
+    this.app.get('/', (req, res) => {
       res.send('Hello World')
     })
   }
-
 }
 
 export default App
