@@ -21,7 +21,6 @@ const App = () => {
     tabBar: {
       position: 'absolute',
       borderTopWidth: 0,
-      height: 80
     },
     tabBarBg: {
       ...StyleSheet.absoluteFillObject,

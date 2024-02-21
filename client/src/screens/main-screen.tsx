@@ -14,7 +14,7 @@ export default function MainScreen() {
   return (
     <ScreenContainer>
       <ScrollView contentContainerStyle={{
-        paddingBottom: 120,
+        paddingBottom: 80,
         paddingTop: 80
       }} padding={6} style={styles.scrollView}>
         <SearchBar />

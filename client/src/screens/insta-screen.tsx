@@ -72,19 +72,18 @@ export default function InstaScreen() {
         allowsInlineMediaPlayback={true}
         onNavigationStateChange={handleNavigationStateChange}
       >
-        <Flex position="absolute" bottom={20} right={6}>
-          <Button backgroundColor='rgba(0,0,0,0)'>
-            <Icon onPress={scrollToTop} name="upcircleo" size={28} color="#316350" />
-          </Button>
-          <Button backgroundColor='rgba(0,0,0,0)'>
-            <Icon onPress={reload} name="sync" size={24} color="#316350" />
-          </Button>
-          <Button backgroundColor='rgba(0,0,0,0)'>
-            <IconFeather onPress={copyUrl} name="copy" size={24} color="#316350" />
-          </Button>
-        </Flex>
       </WebView>
-
+      <Flex position="absolute" bottom={20} right={6}>
+        <Button backgroundColor='rgba(0,0,0,0)'>
+          <Icon onPress={scrollToTop} name="upcircleo" size={28} color="#316350" />
+        </Button>
+        <Button backgroundColor='rgba(0,0,0,0)'>
+          <Icon onPress={reload} name="sync" size={24} color="#316350" />
+        </Button>
+        <Button backgroundColor='rgba(0,0,0,0)'>
+          <IconFeather onPress={copyUrl} name="copy" size={24} color="#316350" />
+        </Button>
+      </Flex>
     </ScreenContainer>
   )
 }
