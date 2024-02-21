@@ -1,5 +1,4 @@
 import {createSelector, createSlice} from '@reduxjs/toolkit'
-import {useSelector} from "react-redux";
 
 export const sessionSlice = createSlice({
   name: 'session',

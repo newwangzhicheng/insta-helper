@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MainScreen from './screens/main-screen'
 import InstaScreen from './screens/insta-screen'
-import HistoryScreen from './screens/history-screen'
 import { Alert, StyleSheet } from 'react-native'
 import { BlurView } from 'expo-blur'
 import { useColorModeValue } from 'native-base'
@@ -12,6 +11,7 @@ import { getItemAsync } from 'expo-secure-store'
 import { update } from './store/sessionSlice'
 import i18n from './locale'
 import Icon from 'react-native-vector-icons/AntDesign'
+import ServerScreen from "./screens/server-screen";
 
 const Tab = createBottomTabNavigator()
 
@@ -92,6 +92,19 @@ const App = () => {
             <Icon name='instagram' color={color} size={size} />
           ),
           tabBarLabel: i18n.t('Instagram'),
+        }}
+      />
+      <Tab.Screen
+        name="Server"
+        component={ServerScreen}
+        options={{
+          headerTransparent: true,
+          headerShown: false,
+          headerTitle: '',
+          tabBarIcon: ({color, size}) => (
+            <Icon name='hdd' color={color} size={size} />
+          ),
+          tabBarLabel: i18n.t('History'),
         }}
       />
       {/*<Tab.Screen*/}

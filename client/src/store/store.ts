@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import sessionReducer from './sessionSlice'
+import serverReducer from './serverSlice'
 import {createLogger} from 'redux-logger'
 
 
 const store = configureStore({
   reducer: {
-    session: sessionReducer
+    session: sessionReducer,
+    server: serverReducer
   },
   // @ts-ignore
   middleware: (getDefaultMiddleware) => [
