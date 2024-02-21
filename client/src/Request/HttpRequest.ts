@@ -14,7 +14,7 @@ export default class HttpRequest {
       session
     })
     console.log(`request body: ${body}`)
-    const result = await fetch('http://localhost:3000/api/v1/post/shortcode', {
+    const result = await fetch('http://192.168.0.100:3000/api/v1/post/shortcode', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

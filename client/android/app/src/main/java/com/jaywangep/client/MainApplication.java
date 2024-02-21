@@ -1,4 +1,4 @@
-package com.client;
+package com.jaywangep.client;
 
 import android.app.Application;
 import android.content.res.Configuration;

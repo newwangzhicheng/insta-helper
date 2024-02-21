@@ -1,4 +1,4 @@
-package com.client;
+package com.jaywangep.client;
 
 import android.os.Build;
 import android.os.Bundle;

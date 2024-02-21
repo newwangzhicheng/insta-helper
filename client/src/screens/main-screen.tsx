@@ -1,4 +1,4 @@
-import {Button, ScrollView} from 'native-base'
+import {Button, ScrollView, View} from 'native-base'
 import SearchBar from '../components/search-bar'
 import { StyleSheet } from 'react-native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
@@ -13,7 +13,10 @@ export default function MainScreen() {
   })
   return (
     <ScreenContainer>
-      <ScrollView p={6} style={styles.scrollView} paddingTop={120}>
+      <ScrollView contentContainerStyle={{
+        paddingBottom: 120,
+        paddingTop: 80
+      }} padding={6} style={styles.scrollView}>
         <SearchBar />
       </ScrollView>
     </ScreenContainer>

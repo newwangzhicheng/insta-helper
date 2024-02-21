@@ -3,18 +3,15 @@ import MainScreen from './screens/main-screen'
 import InstaScreen from './screens/insta-screen'
 import HistoryScreen from './screens/history-screen'
 import { Alert, StyleSheet } from 'react-native'
-import HomeIcon from './components/icons/home-icon'
-import InstaIcon from './components/icons/insta-icon'
-import HistoryIcon from './components/icons/history-icon'
 import { BlurView } from 'expo-blur'
 import { useColorModeValue } from 'native-base'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { Provider, useDispatch } from 'react-redux'
-import store from './store/store'
-import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import {useEffect} from 'react'
 import { getItemAsync } from 'expo-secure-store'
 import { update } from './store/sessionSlice'
 import i18n from './locale'
+import Icon from 'react-native-vector-icons/AntDesign'
 
 const Tab = createBottomTabNavigator()
 
@@ -23,7 +20,8 @@ const App = () => {
   const styles = StyleSheet.create({
     tabBar: {
       position: 'absolute',
-      borderTopWidth: 0
+      borderTopWidth: 0,
+      height: 80
     },
     tabBarBg: {
       ...StyleSheet.absoluteFillObject,
@@ -39,11 +37,11 @@ const App = () => {
       if (value) {
         dispatch(update(value))
       } else {
-        Alert.alert(
-          i18n.t('Sign in to instagram for the full experience'),
-          '',
-          [{ text: i18n.t('OK') }]
-        )
+        // Alert.alert(
+        //   i18n.t('Sign in to Instagram for the full experience'),
+        //   '',
+        //   [{ text: i18n.t('OK') }]
+        // )
       }
     })
   }, [])
@@ -59,7 +57,7 @@ const App = () => {
             style={styles.tabBarBg}
           ></BlurView>
         ),
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
         tabBarBackground: () => (
           <BlurView
             intensity={20}
@@ -67,7 +65,8 @@ const App = () => {
             style={styles.tabBarBg}
           />
         ),
-        tabBarStyle: styles.tabBar
+        tabBarStyle: styles.tabBar,
+        tabBarActiveTintColor: '#34a67c'
       }}
     >
       <Tab.Screen
@@ -77,7 +76,10 @@ const App = () => {
           headerTransparent: true,
           headerShown: true,
           headerTitle: '',
-          tabBarIcon: () => <HomeIcon />
+          tabBarIcon: ({color, size}) => (
+            <Icon name='home' color={color} size={size} />
+          ),
+          tabBarLabel: i18n.t('Home'),
         }}
       />
       <Tab.Screen
@@ -87,16 +89,22 @@ const App = () => {
           headerTransparent: true,
           headerShown: false,
           headerTitle: '',
-          tabBarIcon: () => <InstaIcon />
+          tabBarIcon: ({color, size}) => (
+            <Icon name='instagram' color={color} size={size} />
+          ),
+          tabBarLabel: i18n.t('Instagram'),
         }}
       />
-      <Tab.Screen
-        name="History"
-        component={HistoryScreen}
-        options={{
-          tabBarIcon: () => <HistoryIcon />
-        }}
-      />
+      {/*<Tab.Screen*/}
+      {/*  name="History"*/}
+      {/*  component={HistoryScreen}*/}
+      {/*  options={{*/}
+      {/*    tabBarIcon: ({color, size}) => (*/}
+      {/*      <Icon name='clockcircleo' color={color} size={size} />*/}
+      {/*    ),*/}
+      {/*    tabBarLabel: i18n.t('History'),*/}
+      {/*  }}*/}
+      {/*/>*/}
     </Tab.Navigator>
   )
 }

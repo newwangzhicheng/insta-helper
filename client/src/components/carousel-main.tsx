@@ -1,5 +1,5 @@
 import Carousel, {Pagination} from 'react-native-snap-carousel'
-import {Image, View, Text, Button} from 'native-base'
+import {Flex, Image, View} from 'native-base'
 import { Post, PostNode } from '../Request/ResourcesResponse.interface'
 import { ResizeMode, Video } from 'expo-av'
 import {useState} from "react";
@@ -11,6 +11,7 @@ export default function CarouselMain(params: { post: Post; width: number }) {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0)
   const postNodeItem = ({ item, index }: { item: PostNode; index: number }) => {
     const node = item
+    const height = 480
     if (node.isVideo) {
       return (
         <View>
@@ -23,7 +24,7 @@ export default function CarouselMain(params: { post: Post; width: number }) {
             shouldPlay
             style={{
               width: width,
-              height: 500
+              height: height
             }}
           />
         </View>
@@ -36,7 +37,7 @@ export default function CarouselMain(params: { post: Post; width: number }) {
           resizeMode="contain"
           alt="image"
           width={width}
-          height={500}
+          height={height}
           backgroundColor={'rgba(0,0,0,0)'}
         />
       </View>
@@ -44,18 +45,22 @@ export default function CarouselMain(params: { post: Post; width: number }) {
   }
   return (
     <View>
-      <Carousel
-        data={nodes}
-        renderItem={postNodeItem}
-        sliderWidth={width}
-        itemWidth={width}
-        layoutCardOffset={20}
-        onSnapToItem={(index) => {setActiveSlideIndex(index)}}
-      />
+      <View shadow={9}>
+        <View borderRadius='10' overflow='hidden'>
+          <Carousel
+            data={nodes}
+            renderItem={postNodeItem}
+            sliderWidth={width}
+            itemWidth={width}
+            layoutCardOffset={20}
+            onSnapToItem={(index) => {setActiveSlideIndex(index)}}
+          />
+        </View>
+      </View>
       <Pagination dotsLength={nodes.length}
                   activeDotIndex={activeSlideIndex}
       />
-      <SaveAssetsToAlbum nodes={nodes}></SaveAssetsToAlbum>
+      <SaveAssetsToAlbum nodes={nodes} marginTop={6}></SaveAssetsToAlbum>
     </View>
 
   )
